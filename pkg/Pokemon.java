@@ -5,22 +5,26 @@ public String name;
 public int level;
 public String Type1;
 public String Type2;
-public int movenum1 = 1;
+public int movenum1;
 public String m1;
 public String m1t;
 public int m1p;
-public int movenum2 = 2;
+public int m1a;
+public int movenum2;
 public String m2;
 public String m2t;
 public int m2p;
-public int movenum3 = 3;
+public int m2a;
+public int movenum3;
 public String m3;
 public String m3t;
 public int m3p;
-public int movenum3 = 1;
+public int m3a;
+public int movenum4;
 public String m4;
 public String m4t;
 public int m4p;
+public int m4a;
 public int HP;
 public int atk;
 public int spatk;
@@ -37,18 +41,22 @@ public int movenum1 = 1;
 public String m1t = "Fire";
 public String m1 = "Ember";
 public int m1p = 50;
+public int m1a = 0;
 public int movenum2 = 2;
 public String m2t = "Water";
 public String m2 = "Surf";
 public int m2p = 70;
+public int m2a = 0;
 public int movenum3 = 3;
 public String m3t = "Grass";
 public String m3 = "Leaf blade";
 public int m3p = 80;
+public int m3a = 0;
 public int movenum4 = 4;
 public String m4t = "Fighting";
 public String m4 = "Close combat";
 public int m4p = 120;
+public int m4a = 0;
 public int HP = 50;
 public int atk = 50;
 public int spatk = 50;
@@ -56,6 +64,8 @@ public int def = 50;
 public int spdef = 50;
 public int spd = 50;
 }
+
+
 
 public String getName(){
     return name;
@@ -637,12 +647,26 @@ if(Type1.equals("Steel") || Type2.equals("Steel")){
 }
 
 }
+}
 
+ public static boolean DidItLand(MoveAccuracy) {
+ int hit = (int) (Math.random() * (100 - 0 + 1)) + 0;
+ if (hit > MoveAccuracy){
+    return false;
+ }
+ else{
+    return true;
+ }
 
 }
 
- public static int calculateDamage(Pokemon defing, String Optype1, String Optype2, int OpDef, int OpSpDef, int basePower, String movetype) {
+
+
+ public static int calculateDamage(Pokemon opping, Pokemon defing, String Optype1, String Optype2, int OpDef, int OpSpDef, int basePower,String movename, String movetype, int MoveAcc) {
         // Damage calculation formula in Generation 1
+        boolean Cheese = opping.DidItLand(MoveAcc);
+        if(cheese == true)
+        {
         if(movetype.equals("Normal") || movetype.equals("Fighting") || movetype.equals("Poison") || movetype.equals("Ground") || movetype.equals("Flying") || movetype.equals("Bug") || movetype.equals("Rock") || movetype.equals("Ghost") || movetype.equals("Steel"))
         {
         int damage = (((((2 * level) / 5) + 2) * basePower * atk) / OpDef) / 50 + 2;
@@ -738,7 +762,13 @@ if(Type1.equals("Steel") || Type2.equals("Steel")){
         damage = damage/255;
         }
         return damage;    
-    
+        }
+        if(cheese == false)
+        {
+            System.out.println("Your move, " + movename + " missed!");
+            damage = 0;
+            return false;
+        }
 }
 
 
